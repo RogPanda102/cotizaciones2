@@ -7,6 +7,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 /*
 |--------------------------------------------------------------------------
+| BASE URL
+|--------------------------------------------------------------------------
+*/
+
+define('BASE_URL', '/' . basename(dirname(__DIR__)));
+
+/*
+|--------------------------------------------------------------------------
 | HELEPERS ROUTES
 |--------------------------------------------------------------------------
 */
@@ -37,5 +45,3 @@ require_once __DIR__ . '/../helpers/funciones_globales.php';
 
 $rutas = require __DIR__ . '/rutas.php';
 require_once __DIR__ . '/../app/Enums/TipoAlerta.php';
-
-define('BASE_URL', '/cotizaciones2');
