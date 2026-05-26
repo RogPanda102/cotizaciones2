@@ -62,12 +62,12 @@ class Router
 
 function route($name)
 {
-    return '/cotizaciones2' . Router::$namedRoutes[$name];
+    return BASE_URL . Router::$namedRoutes[$name];
 }
 
 function asset($ruta)
 {
-    return '/cotizaciones2/' . ltrim($ruta, '/');
+    return BASE_URL . '/' . ltrim($ruta, '/');
 }
 
 function config($key)

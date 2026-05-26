@@ -22,5 +22,7 @@ $breadcrumb_array = [
 
 $breadcrumb = breadcrumb($tarea, $breadcrumb_array);
 
-mensaje('Pedro que gusto de verTE',TipoAlerta::SUCCESS);
+// mensaje('Pedro que gusto de verTE',TipoAlerta::SUCCESS); 
+// ES UN EJEMPLO DE UN MENSAJE
+
 include __DIR__ . '/../../pages/empresas/index.php';
