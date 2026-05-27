@@ -27,7 +27,7 @@ Router::post('/dependencias/update', 'dependencias::update', [
     'as' => 'dependencias.update'
 ]);
 
-Router::get('/dependencias/delete', 'dependencias::delete', [
+Router::post('/dependencias/delete', 'dependencias::delete', [
     'as' => 'dependencias.delete'
 ]);
 

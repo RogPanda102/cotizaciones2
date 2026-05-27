@@ -22,7 +22,7 @@
             </li>
             <!-- DEPENDENCIAS -->
             <li>
-                <a href="../../pages/dependencias/index.php">
+                <a href="<?= route('dependencias.index') ?>">
                     <i class="nc-icon nc-bank"></i>
                     <p>Dependencias</p>
                 </a>

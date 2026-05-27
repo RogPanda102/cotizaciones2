@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/../../includes/layout_start.php'; ?>
-
+<?php /** @var array $cotizaciones */ ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
 
     <!-- IZQUIERDA -->
