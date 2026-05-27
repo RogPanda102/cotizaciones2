@@ -29,7 +29,7 @@
             </li>
             <!-- PROVEEDORES -->
             <li>
-                <a href="../../pages/proveedores/index.php">
+                <a href="<?= route('proveedores.index') ?>">
                     <i class="nc-icon nc-delivery-fast"></i>
                     <p>Proveedores</p>
                 </a>

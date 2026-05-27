@@ -62,7 +62,7 @@ $stmt->execute([
 ]);
 
 mensaje(
-    'Dependencia creada correctamente',
+    'Dependencia actualizada correctamente',
     TipoAlerta::SUCCESS
 );
 
