@@ -45,3 +45,4 @@ require_once __DIR__ . '/../helpers/funciones_globales.php';
 
 $rutas = require __DIR__ . '/rutas.php';
 require_once __DIR__ . '/../app/Enums/TipoAlerta.php';
+require_once __DIR__ . '/../helpers/old.php';

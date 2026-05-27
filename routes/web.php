@@ -42,8 +42,8 @@ Router::get('/cotizaciones/create', 'cotizaciones::create', [
     'as' => 'cotizaciones.create'
 ]);
 
-Router::post('/cotizaciones/store', 'cotizaciones::store', [
-    'as' => 'cotizaciones.store'
+Router::post('/cotizaciones/delete', 'cotizaciones::delete', [
+    'as' => 'cotizaciones.delete'
 ]);
 
 Router::get('/cotizaciones/edit', 'cotizaciones::edit', [
@@ -53,6 +53,12 @@ Router::get('/cotizaciones/edit', 'cotizaciones::edit', [
 Router::post('/cotizaciones/update', 'cotizaciones::update', [
     'as' => 'cotizaciones.update'
 ]);
+
+Router::post('/cotizaciones/store', 'cotizaciones::store', [
+    'as' => 'cotizaciones.store'
+]);
+
+
 
 // =======================
 // PEDIDOS

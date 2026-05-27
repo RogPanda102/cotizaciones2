@@ -44,8 +44,8 @@
                 <select
                     name="dependencia_id"
                     class="form-control"
-                    {{-- x-model="dependenciaId"
-                    @change="limpiarDepartamento" --}}
+                    <!-- x-model="dependenciaId"
+                    @change="limpiarDepartamento" -->
                     onchange="$(this).valid()"
                 >
                     <option value="">Seleccionar dependencia</option>

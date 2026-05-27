@@ -1,38 +1,42 @@
-@extends('layouts.app')
+<?php include __DIR__ . '/../../includes/layout_start.php'; ?>
 
-@section('content')
+<?php
+    /** @var array $empresas */
+    /** @var array $departamentos */
+    /** @var array $analistas */
+    /** @var array $dependencias */
+?>
 
-{{-- =======================================================
+ <!-- =======================================================
     ERRORES DE VALIDACIÓN
-======================================================= --}}
-@if ($errors->any())
+=======================================================  -->
+<?php if (!empty($errors) && is_array($errors)): ?>
     <div class="alert alert-danger">
         <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+            <?php foreach ($errors as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
         </ul>
     </div>
-@endif
+<?php endif; ?>
 
 <div
     class="container"
     x-data="cotizacionForm()"
 >
 
-    {{-- =======================================================
+    <!-- =======================================================
         FORMULARIO
-    ======================================================= --}}
+    ======================================================= -->
     <form
         id="formCotizacion"
         method="POST"
-        action="{{ route('cotizaciones.store') }}"
+        action="<?= route('cotizaciones.store') ?>"
     >
-        @csrf
 
-        {{-- =======================================================
+        <!-- =======================================================
             INFORMACIÓN BASE
-        ======================================================= --}}
+        ======================================================= -->
         <div class="card mb-3">
 
             <div class="card-header fw-bold">
@@ -41,7 +45,7 @@
 
             <div class="card-body row">
 
-                {{-- EMPRESA --}}
+                <!-- EMPRESA -->
                 <div class="col-md-4">
                     <label>Empresa</label>
 
@@ -54,15 +58,17 @@
                             Seleccionar
                         </option>
 
-                        @foreach($empresas as $empresa)
-                            <option value="{{ $empresa->id }}">
-                                {{ $empresa->nombre }}
+                        <?php foreach($empresas as $empresa): ?>
+
+                            <option value="<?= $empresa->id ?>">
+                                <?= $empresa->nombre ?>
                             </option>
-                        @endforeach
+
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
-                {{-- TIPO --}}
+                <!-- TIPO -->
                 <div class="col-md-4">
                     <label>Tipo de cotización</label>
 
@@ -90,7 +96,7 @@
                     </select>
                 </div>
 
-                {{-- ESTADO --}}
+                <!-- ESTADO -->
                 <div class="col-md-4">
                     <label>Estado</label>
 
@@ -115,7 +121,7 @@
                     </select>
                 </div>
 
-                {{-- NÚMERO --}}
+                <!-- NÚMERO -->
                 <div class="col-md-6 mt-3">
                     <label>Número de cotización</label>
 
@@ -126,7 +132,7 @@
                     >
                 </div>
 
-                {{-- FOLIO --}}
+                <!-- FOLIO -->
                 <div class="col-md-6 mt-3">
                     <label>Folio externo</label>
 
@@ -140,9 +146,9 @@
             </div>
         </div>
 
-        {{-- =======================================================
+        <!-- =======================================================
             RELACIONES
-        ======================================================= --}}
+        ======================================================= -->
         <div
             class="card mb-3"
             x-show="tipo !== 'cliente_externo'"
@@ -154,7 +160,7 @@
 
             <div class="card-body row">
 
-                {{-- DEPENDENCIA --}}
+                <!-- DEPENDENCIA -->
                 <div class="col-md-4">
 
                     <label>Dependencia</label>
@@ -180,7 +186,7 @@
 
                 </div>
 
-                {{-- DEPARTAMENTO --}}
+                <!-- DEPARTAMENTO -->
                 <div class="col-md-4">
 
                     <label>Departamento</label>
@@ -200,7 +206,7 @@
                         >
                             <option
                                 :value="dep.id"
-                                x-text="dep.responsable"
+                                x-text="dep.nombre"
                             ></option>
                         </template>
                     </select>
@@ -216,7 +222,7 @@
 
                 </div>
 
-                {{-- ANALISTA --}}
+                <!-- ANALISTA -->
                 <div class="col-md-4">
 
                     <label>Analista</label>
@@ -255,9 +261,9 @@
             </div>
         </div>
 
-        {{-- =======================================================
+        <!-- =======================================================
             FECHAS
-        ======================================================= --}}
+        ======================================================= -->
         <div class="card mb-3">
 
             <div class="card-header fw-bold">
@@ -266,7 +272,7 @@
 
             <div class="card-body row">
 
-                {{-- FECHA ENVÍO --}}
+                <!-- FECHA ENVÍO -->
                 <div class="col-md-6">
 
                     <label>Fecha envío</label>
@@ -281,7 +287,7 @@
                     >
                 </div>
 
-                {{-- FECHA RECEPCIÓN --}}
+                <!-- FECHA RECEPCIÓN -->
                 <div class="col-md-6">
 
                     <label>Fecha recepción</label>
@@ -296,9 +302,9 @@
             </div>
         </div>
 
-        {{-- =======================================================
+        <!-- =======================================================
             GARANTÍA
-        ======================================================= --}}
+        ======================================================= -->
         <div class="card mb-3">
 
             <div class="card-header fw-bold">
@@ -333,9 +339,9 @@
             </div>
         </div>
 
-        {{-- =======================================================
+        <!-- =======================================================
             ENTREGA
-        ======================================================= --}}
+        ======================================================= -->
         <div
             class="card mb-3"
             x-show="tipo !== 'cliente_externo'"
@@ -372,9 +378,9 @@
             </div>
         </div>
 
-        {{-- =======================================================
+        <!-- =======================================================
             FINANCIEROS
-        ======================================================= --}}
+        ======================================================= -->
         <div
             class="card mb-3"
             x-show="tipo === 'omg'"
@@ -418,9 +424,9 @@
             </div>
         </div>
 
-        {{-- =======================================================
+        <!-- =======================================================
             BOTÓN GUARDAR
-        ======================================================= --}}
+        ======================================================= -->
         <div class="text-end">
 
             <button
@@ -434,9 +440,9 @@
 
     </form>
 
-    {{-- =======================================================
+    <!-- =======================================================
         MODAL ANALISTA
-    ======================================================= --}}
+    ======================================================= -->
     <div
         class="modal fade"
         id="modalAnalista"
@@ -542,9 +548,9 @@
         </div>
     </div>
 
-    {{-- =======================================================
+    <!-- =======================================================
         MODAL DEPARTAMENTO
-    ======================================================= --}}
+    ======================================================= -->
     <div
         class="modal fade"
         id="modalDepartamento"
@@ -629,7 +635,7 @@
 
                     </div>
 
-                    {{-- ALERTA DEPARTAMENTO EXISTENTE --}}
+                    <!-- ALERTA DEPARTAMENTO EXISTENTE -->
                     <div
                         id="departamento-existente"
                         class="alert alert-warning d-none"
@@ -673,78 +679,96 @@
         </div>
     </div>
 </div>
-{{-- =======================================================
+<!-- =======================================================
     ESTILOS
-======================================================= --}}
+======================================================= -->
 <style>
     [x-cloak] {
         display: none !important;
     }
 </style>
-{{-- =======================================================
+<!-- =======================================================
     DATOS PARA JAVASCRIPT
-======================================================= --}}
-@php
-    $analistasJson = $analistas->map(function ($a) {
-        $nombreCompleto = trim(
-            implode(
-                ' ',
-                array_filter([
-                    $a->nombre,
-                    $a->apellido_paterno,
-                    $a->apellido_materno,
-                ])
-            )
-        );
-        return [
-            'id' => $a->id,
-            'nombre' => $nombreCompleto,
-        ];
-    })->values();
-@endphp
-@push('scripts')
-    <script>
-        window.cotizacionData = {
-            old: {
+======================================================= -->
 
-                tipo:
-                    "{{ old('tipo_cotizacion') }}",
-                estado:
-                    "{{ old('estado', 'enviado') }}",
-                fechaEnvio:
-                    "{{ old('fecha_envio') }}",
-                dependenciaId:
-                    "{{ old('dependencia_id') }}",
-                analistaId:
-                    "{{ old('analista_id') }}",
-                departamentoId:
-                    "{{ old('departamento_id') }}"
-            },
-            dependencias: @json(
-                $dependencias->map(fn($d) => [
-                    'id' => $d->id,
-                    'nombre' => $d->nombre_oficial
-                ])->values()
-            ),
-            analistas: @json($analistasJson),
-            departamentos: @json(
-                $departamentos->map(fn($d) => [
-                    'id' => $d->id,
-                    'responsable' => $d->responsable
-                ])->values()
-            ),
-            csrfToken:
-                "{{ csrf_token() }}",
-            routes: {
-                analistasStore:
-                    "{{ route('analistas.store') }}",
-                departamentosStore:
-                    "{{ route('departamentos.store') }}",
-                departamentosBuscar:
-                    "{{ route('departamentos.buscar') }}"
-            }
-        };
-    </script>
-    <script src="{{ asset(config('rutas.js_especificos') . 'cotizaciones/cotizaciones_create.js') }}"></script>
-@endpush
-@endsection
+<?php
+
+$analistasJson = [];
+
+foreach ($analistas as $a)
+{
+    $nombreCompleto = trim(
+        $a->nombre . ' ' .
+        ($a->apellido_paterno ?? '') . ' ' .
+        ($a->apellido_materno ?? '')
+    );
+
+    $analistasJson[] = [
+        'id' => $a->id,
+        'nombre' => $nombreCompleto
+    ];
+}
+
+$dependenciasJson = [];
+
+foreach ($dependencias as $d)
+{
+    $dependenciasJson[] = [
+        'id' => $d->id,
+        'nombre' => $d->nombre_oficial
+    ];
+}
+
+$departamentosJson = [];
+
+foreach ($departamentos as $d)
+{
+    $departamentosJson[] = [
+        'id' => $d->id,
+        'nombre' => $d->nombre_departamento
+    ];
+}
+
+?>
+
+<script>
+
+window.cotizacionData = {
+
+    old: {
+
+        tipo: '',
+        estado: 'enviado',
+        fechaEnvio: '',
+        dependenciaId: '',
+        analistaId: '',
+        departamentoId: ''
+
+    },
+
+    dependencias: <?= json_encode($dependenciasJson) ?>,
+
+    analistas: <?= json_encode($analistasJson) ?>,
+
+    departamentos: <?= json_encode($departamentosJson) ?>,
+
+    routes: {
+
+        analistasStore:
+            "<?= route('analistas.store') ?>",
+
+        departamentosStore:
+            "<?= route('departamentos.store') ?>",
+
+        departamentosBuscar:
+            "<?= route('departamentos.buscar') ?>"
+
+    }
+
+};
+
+</script>
+
+<script src="<?= asset('assets/js/especificos/cotizaciones/cotizaciones_create.js') ?>"></script>
+
+<?php include __DIR__ . '/../../includes/layout_end.php'; ?>
