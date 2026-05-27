@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
 
-        {{-- FECHAS --}}
+        <!-- FECHAS -->
         <h6 class="mb-3">Fechas</h6>
 
         <div class="row">
@@ -42,7 +42,7 @@
 
         <hr>
 
-        {{-- ESTADO DE TIEMPO --}}
+        <!-- ESTADO DE TIEMPO -->
         <h6 class="mb-3">Estado de tiempo</h6>
 
         @if($pedido->estado->esFinal())

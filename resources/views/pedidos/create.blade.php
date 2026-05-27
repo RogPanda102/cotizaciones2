@@ -12,7 +12,7 @@
 
     <div x-data="pedidoForm()">
 
-        {{-- 🔹 DATOS GENERALES --}}
+        <!-- 🔹 DATOS GENERALES -->
         <h5 class="mb-3">Datos generales</h5>
 
         <div class="row">
@@ -43,8 +43,8 @@
                 <select
                     name="dependencia_id"
                     class="form-control"
-                    {{-- x-model="dependenciaId"
-                    @change="limpiarDepartamento" --}}
+                    <!-- x-model="dependenciaId"
+                    @change="limpiarDepartamento" -->
                     onchange="$(this).valid()"
                 >
                     <option value="">Seleccionar dependencia</option>
@@ -61,7 +61,7 @@
 
         <hr>
 
-        {{-- 🔹 DEPARTAMENTO / PROVEEDOR --}}
+        <!-- 🔹 DEPARTAMENTO / PROVEEDOR -->
         <h5 class="mb-3">Departamento, analista y proveedor</h5>
 
         <div class="row">
@@ -128,7 +128,7 @@
 
         <hr>
 
-        {{-- 🔹 TIPO DE PEDIDO --}}
+        <!-- 🔹 TIPO DE PEDIDO -->
         <h5 class="mb-3">Tipo de pedido</h5>
 
         <div class="row">
@@ -155,7 +155,7 @@
             </div>
         </div>
 
-        {{-- SERVICIO --}}
+        <!-- SERVICIO -->
         <div x-show="tipo === 'servicio'" x-cloak>
             <hr>
             <h5>Datos del servicio</h5>
@@ -186,7 +186,7 @@
                 
         </div>
 
-        {{-- LICENCIA --}}
+        <!-- LICENCIA -->
         <div x-show="tipo === 'licencia'" x-cloak>
             <hr>
             <h5>Datos de licencia</h5>
@@ -219,7 +219,7 @@
             </div>
         </div>
 
-        {{--  MERCADEO --}}
+        <!--  MERCADEO -->
         <div x-show="tipo === 'mercadeo'" x-cloak>
             <hr>
             <p class="text-muted">
@@ -229,7 +229,7 @@
 
         <hr>
 
-        {{-- 🔹 FINANZAS Y FECHAS --}}
+        <!-- 🔹 FINANZAS Y FECHAS -->
         <h5 class="mb-3">Condiciones</h5>
 
         <div class="row">
@@ -266,7 +266,7 @@
 
         <hr>
 
-        {{-- 🔹 BOTÓN --}}
+        <!-- 🔹 BOTÓN -->
         <button type="submit" class="btn btn-primary">
             Guardar Pedido
         </button>

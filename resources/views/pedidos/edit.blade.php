@@ -17,7 +17,7 @@
         @csrf
         @method('PUT')
 
-        {{-- Estado --}}
+        <!-- Estado -->
         <div class="mb-3">
             <label for="estado" class="form-label">Estado</label>
             <select name="estado" class="form-control">
@@ -37,7 +37,7 @@
             @enderror
         </div>
 
-        {{-- Fecha Facturación --}}
+        <!-- Fecha Facturación -->
         <div class="mb-3">
             @if($pedido->estado === App\Enums\EstadoPedido::FACTURADO)
             <label for="fecha_facturacion" class="form-label">

@@ -1,5 +1,7 @@
 <?php include __DIR__ . '/../../includes/layout_start.php'; ?>
-
+<?php
+/** @var array $cotizaciones */
+?>
 <div class="d-flex justify-content-between align-items-center mb-3">
 
     <!-- IZQUIERDA -->
@@ -110,10 +112,16 @@
                                 class="btn btn-sm btn-outline-danger"
                                 onclick="eliminarCotizacion(<?= $cotizacion->id ?>)"
                             >
-
                                 Eliminar
-
                             </button>
+
+                            <!-- FORM OCULTO -->
+                            <form
+                                id="delete-form-<?= $cotizacion->id ?>"
+                                action="<?= route('cotizaciones.delete') ?>?id=<?= $cotizacion->id ?>"
+                                method="POST"
+                                style="display:none;"
+                            ></form>
 
                         </div>
 

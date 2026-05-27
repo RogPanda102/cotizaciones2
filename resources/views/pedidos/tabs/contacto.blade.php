@@ -1,6 +1,6 @@
 <div class="row">
 
-    {{-- DEPARTAMENTO --}}
+    <!-- DEPARTAMENTO -->
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header">
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    {{-- PROVEEDOR --}}
+    <!-- PROVEEDOR -->
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header">
@@ -66,8 +66,8 @@
                     <strong>Teléfono:</strong><br>
                     {{ $pedido->proveedor->telefono ?? '—' }}
                 </p>
-                {{-- agrega más campos si tienes --}}
-                {{-- teléfono, contacto, etc. --}}
+                <!-- agrega más campos si tienes -->
+                <!-- teléfono, contacto, etc. -->
 
             </div>
         </div>

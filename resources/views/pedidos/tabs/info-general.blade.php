@@ -1,6 +1,6 @@
 <div class="row">
 
-    {{-- IDENTIFICACIÓN --}}
+    <!-- IDENTIFICACIÓN -->
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header">
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    {{-- OPERACIÓN --}}
+    <!-- OPERACIÓN -->
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header">
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    {{-- CONDICIONES --}}
+    <!-- CONDICIONES -->
     <div class="col-12">
         <div class="card">
             <div class="card-header">

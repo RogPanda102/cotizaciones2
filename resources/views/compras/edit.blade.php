@@ -23,7 +23,7 @@
         @csrf
         @method('PUT')
 
-        {{-- Fecha --}}
+        <!-- Fecha -->
         <div class="mb-3">
             <label class="form-label">Fecha</label>
             <input type="date" name="fecha"
@@ -31,7 +31,7 @@
                 class="form-control">
         </div>
 
-        {{-- Cantidad --}}
+        <!-- Cantidad -->
         <div class="mb-3">
             <label class="form-label">Cantidad</label>
             <input type="number" step="0.01" name="cantidad"
@@ -39,7 +39,7 @@
                 class="form-control">
         </div>
 
-        {{-- Unidad --}}
+        <!-- Unidad -->
         <div class="mb-3">
             <label class="form-label">Unidad</label>
             <input type="text" name="unidad"
@@ -47,7 +47,7 @@
                 class="form-control">
         </div>
 
-        {{-- Descripción --}}
+        <!-- Descripción -->
         <div class="mb-3">
             <label class="form-label">Descripción</label>
             <input type="text" name="descripcion"
@@ -55,7 +55,7 @@
                 class="form-control">
         </div>
 
-        {{-- Monto --}}
+        <!-- Monto -->
         <div class="mb-3">
             <label class="form-label">Monto</label>
             <input type="number" step="0.01" name="monto"
@@ -63,7 +63,7 @@
                 class="form-control">
         </div>
 
-        {{-- Proveedor --}}
+        <!-- Proveedor -->
         <div class="mb-3">
             <label class="form-label">Proveedor</label>
             <select name="proveedor_id" class="form-control">
