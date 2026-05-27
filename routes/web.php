@@ -109,6 +109,18 @@ Router::post('/proveedores/store', 'proveedores::store', [
     'as' => 'proveedores.store'
 ]);
 
+Router::get('/proveedores/edit', 'proveedores::edit', [
+    'as' => 'proveedores.edit'
+]);
+
+Router::post('/proveedores/update', 'proveedores::update', [
+    'as' => 'proveedores.update'
+]);
+
+Router::post('/proveedores/delete', 'proveedores::delete', [
+    'as' => 'proveedores.delete'
+]);
+
 // =======================
 // EMPRESAS
 // =======================
