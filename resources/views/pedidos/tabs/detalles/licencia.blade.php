@@ -1,6 +1,6 @@
 <div class="row">
 
-    {{-- IDENTIDAD --}}
+    <!-- IDENTIDAD -->
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header">
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    {{-- USO --}}
+    <!-- USO -->
     <div class="col-md-6 mb-3">
         <div class="card h-100">
             <div class="card-header">
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    {{-- VIGENCIA --}}
+    <!-- VIGENCIA -->
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -75,7 +75,7 @@
 
                 </div>
 
-                {{-- 🔥 ESTADO --}}
+                <!-- 🔥 ESTADO -->
                 @if($pedido->estado_licencia === 'vencido')
 
                     <span class="badge bg-danger">

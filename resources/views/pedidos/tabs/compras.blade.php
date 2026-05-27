@@ -146,7 +146,7 @@ ${{ number_format($pedido->totalGastado(), 2) }}
     </form>
 @endif
 
-        {{-- ESTE SCRIPT ES DE LOS JS ESPECIFICOS, NOTIFICACIONES --}}
+        <!-- ESTE SCRIPT ES DE LOS JS ESPECIFICOS, NOTIFICACIONES -->
 <script src="{{ asset('js/especificos/notificaciones_alertas.js') }}"></script> 
-        {{-- ESTE SCRIPT ES DE LOS JS ESPECIFICOS, NOTIFICACIONES --}}
+        <!-- ESTE SCRIPT ES DE LOS JS ESPECIFICOS, NOTIFICACIONES -->
         <script src="{{ asset(config('rutas.js_especificos') . 'pedidos/tabs/pedidos_compras.js') }}"></script>

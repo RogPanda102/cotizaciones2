@@ -110,10 +110,16 @@
                                 class="btn btn-sm btn-outline-danger"
                                 onclick="eliminarCotizacion(<?= $cotizacion->id ?>)"
                             >
-
                                 Eliminar
-
                             </button>
+
+                            <!-- FORM OCULTO -->
+                            <form
+                                id="delete-form-<?= $cotizacion->id ?>"
+                                action="<?= route('cotizaciones.delete') ?>?id=<?= $cotizacion->id ?>"
+                                method="POST"
+                                style="display:none;"
+                            ></form>
 
                         </div>
 
