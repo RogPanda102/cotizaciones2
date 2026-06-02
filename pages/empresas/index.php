@@ -2,7 +2,7 @@
 <div style="display: flex; gap: 30px; justify-content: center; margin-top: 40px; flex-wrap: wrap;">
     <?php if (!empty($empresas)): ?>
         <?php foreach($empresas as $empresa): ?>
-            <a href="/cotizaciones2/pages/empresas/pedidos.php?id=<?= $empresa->id ?>" style="text-decoration: none; color: inherit;">
+            <a href="<?= route('pedidos.index') ?>?empresa_id=<?= $empresa->id ?>" style="text-decoration: none; color: inherit;">
                 <div style="
                     width: 180px;
                     height: 180px;

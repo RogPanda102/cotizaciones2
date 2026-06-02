@@ -1,38 +1,6 @@
+
 let departamentoDetectado = null;
 
-function pedidoForm() {
-
-    return {
-        dependencias: window.appData?.dependencias ?? [],
-
-        tipo: window.pedidoOld?.tipo ?? '',
-
-        dependenciaId: window.pedidoOld?.dependenciaId ?? '',
-
-        departamentoId: window.pedidoOld?.departamentoId ?? '',
-
-        analistaId: window.pedidoOld?.analistaId ?? '',
-
-        get departamentosFiltrados() {
-
-            const dependencia = this.dependencias.find(
-                dep => dep.id == this.dependenciaId
-            );
-
-            return dependencia
-                ? dependencia.departamentos
-                : [];
-        },
-
-        limpiarDepartamento() {
-
-            this.departamentoId = '';
-
-        }
-
-    };
-
-}
 
 function cerrarModalDepartamento() 
 {
@@ -286,6 +254,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const telefono = document.getElementById('nuevo_telefono');
 
+    const dependenciaSelect =
+        document.getElementById('dependenciaSelect');
+
+    const departamentoSelect =
+        document.getElementById('departamentoSelect');
+
+    const tipoSelect = document.querySelector('select[name="tipo"]');
+
+    const bloqueServicio = document.getElementById('servicioSection');
+
+    const bloqueLicencia = document.getElementById('licenciaSection');
+
+    const bloqueMercadeo = document.getElementById('mercadeoSection');
+
     if (email) {
         email.addEventListener('blur', buscarDepartamentoExistente);
     }
@@ -294,114 +276,229 @@ document.addEventListener('DOMContentLoaded', () => {
         telefono.addEventListener('blur', buscarDepartamentoExistente);
     }
 
-});
+    if (!dependenciaSelect || !departamentoSelect) {
+        return;
+    }
 
-    $(document).ready(function () {
+    dependenciaSelect.addEventListener('change', async () => {
 
-        $('#formPedido').validate({
+        const dependenciaId = dependenciaSelect.value;
 
-            errorClass: 'error',
+        departamentoSelect.innerHTML =
+            '<option value="">Selecciona departamento</option>';
 
-            highlight: function(element) {
-                $(element).addClass('is-invalid');
-            },
+        if (!dependenciaId) {
 
-            unhighlight: function(element) {
-                $(element).removeClass('is-invalid');
-            },
+            departamentoSelect.innerHTML =
+                '<option value="">Selecciona departamento</option>';
 
-            rules: {
+            return;
+        }
 
-                dependencia_id: {
-                    required: true
-                },
+        try {
 
-                departamento_id: {
-                    required: true
-                },
+            const response = await fetch(
+                `${window.routes.departamentosPorDependencia}?dependencia_id=${dependenciaId}`
+            );
+            const departamentos = await response.json();
+            departamentos.forEach(departamento => {
 
-                analista_id:{
-                    required: true
-                },
+                const option =
+                    document.createElement('option');
 
-                proveedor_id:{
-                    required: true
-                },
+                option.value =
+                    departamento.id;
 
-                monto_total_aprobado: {
-                    required: true
-                },
+                option.textContent =
+                    departamento.nombre_departamento
+                        ? departamento.nombre_departamento
+                        : departamento.responsable;
 
-                fecha_adjudicacion: {
-                    required: true
-                },
+                
 
-                dias_entrega: {
-                    required: true
-                },
+                departamentoSelect.appendChild(option);
 
-                dias_credito: {
-                    required: true
-                },
+            });
+            if (departamentos.length === 0) {
 
-                tipo: {
-                    required: true
-                },
-                lugar_entrega:{
-                    required: true
-                },
-                descripcion_servicio:{
-                    required: true
-                }
+                departamentoSelect.innerHTML =
+                    '<option value="">Sin departamentos disponibles</option>';
 
-            },
-
-            messages: {
-
-                dependencia_id: {
-                    required: 'Selecciona una dependencia'
-                },
-
-                departamento_id: {
-                    required: 'Selecciona un departamento'
-                },
-
-                analista_id:{
-                    required: 'Selecciona o agrega un analista'
-                },
-
-                proveedor_id:{
-                    required: 'Selecciona o agrega un proveedor'
-                },
-
-                monto_total_aprobado: {
-                    required: 'Ingresa el monto aprobado'
-                },
-
-                fecha_adjudicacion: {
-                    required: 'Selecciona la fecha'
-                },
-
-                dias_entrega: {
-                    required: 'Ingresa los días de entrega'
-                },
-
-                dias_credito: {
-                    required: 'Ingresa los días de crédito'
-                },
-
-                tipo: {
-                    required: 'Selecciona un tipo'
-                },
-                lugar_entrega:{
-                    required: 'Especifica lugar de entrega'
-                },
-                descripcion_servicio:{
-                    required: 'Agrega úna descipcion de servicio'
-                }
-
+                return;
             }
 
-        });
+        } catch (error) {
+
+            console.error(error);
+
+            departamentoSelect.innerHTML =
+                '<option value="">Error al cargar</option>';
+
+        }
+
+        
 
     });
+
+    function actualizarFormulario() {
+
+        const tipo = tipoSelect.value;
+
+        bloqueServicio.style.display = 'none';
+        bloqueLicencia.style.display = 'none';
+        bloqueMercadeo.style.display = 'none';
+
+        if (tipo === 'servicio') {
+            bloqueServicio.style.display = 'block';
+        }
+
+        if (tipo === 'licencia') {
+            bloqueLicencia.style.display = 'block';
+        }
+
+        if (tipo === 'mercadeo') {
+            bloqueMercadeo.style.display = 'block';
+        }
+    }
+
+    tipoSelect.addEventListener('change', actualizarFormulario);
+
+    actualizarFormulario();
+
+});
+
+    // $(document).ready(function () {
+
+    //     $('#formPedido').validate({
+
+    //         errorClass: 'error',
+
+    //         highlight: function(element) {
+    //             $(element).addClass('is-invalid');
+    //         },
+
+    //         unhighlight: function(element) {
+    //             $(element).removeClass('is-invalid');
+    //         },
+
+    //         rules: {
+
+    //             dependencia_id: {
+    //                 required: true
+    //             },
+
+    //             departamento_id: {
+    //                 required: true
+    //             },
+
+    //             analista_id:{
+    //                 required: true
+    //             },
+
+    //             proveedor_id:{
+    //                 required: true
+    //             },
+
+    //             monto_total_aprobado: {
+    //                 required: true
+    //             },
+
+    //             fecha_adjudicacion: {
+    //                 required: true
+    //             },
+
+    //             dias_entrega: {
+    //                 required: true
+    //             },
+
+    //             dias_credito: {
+    //                 required: true
+    //             },
+
+    //             tipo: {
+    //                 required: true
+    //             },
+    //             lugar_entrega:{
+    //                 required: true
+    //             },
+    //             descripcion_servicio:{
+    //                 required: function () {
+    //                     return $('#tipoPedido').val() === 'servicio';
+    //                 }
+    //             },
+    //             nombre_licencia:{
+    //                 required: function () {
+    //                     return $('#tipoPedido').val() === 'licencia';
+    //                 }
+    //             },
+    //             tipo_licencia:{
+    //                 required: function () {
+    //                     return $('#tipoPedido').val() === 'licencia';
+    //                 }
+    //             },
+    //             numero_usuarios:{
+    //                 required: function () {
+    //                     return $('#tipoPedido').val() === 'licencia';
+    //                 }
+    //             }
+
+    //         },
+
+    //         messages: {
+
+    //             dependencia_id: {
+    //                 required: 'Selecciona una dependencia'
+    //             },
+
+    //             departamento_id: {
+    //                 required: 'Selecciona un departamento'
+    //             },
+
+    //             analista_id:{
+    //                 required: 'Selecciona o agrega un analista'
+    //             },
+
+    //             proveedor_id:{
+    //                 required: 'Selecciona o agrega un proveedor'
+    //             },
+
+    //             monto_total_aprobado: {
+    //                 required: 'Ingresa el monto aprobado'
+    //             },
+
+    //             fecha_adjudicacion: {
+    //                 required: 'Selecciona la fecha'
+    //             },
+
+    //             dias_entrega: {
+    //                 required: 'Ingresa los días de entrega'
+    //             },
+
+    //             dias_credito: {
+    //                 required: 'Ingresa los días de crédito'
+    //             },
+
+    //             tipo: {
+    //                 required: 'Selecciona un tipo'
+    //             },
+    //             lugar_entrega:{
+    //                 required: 'Especifica lugar de entrega'
+    //             },
+    //             descripcion_servicio:{
+    //                 required: 'Agrega una descripción de servicio'
+    //             },
+    //             nombre_licencia:{
+    //                 required: 'Agrega un nombre para la licencia'
+    //             },
+    //             tipo_licencia:{
+    //                 required: 'Selecciona un tipo de licencia'
+    //             },
+    //             numero_usuarios:{
+    //                 required: 'Ingresa el número de usuarios'
+    //             }
+
+    //         }
+
+    //     });
+
+    // });

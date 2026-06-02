@@ -71,13 +71,17 @@ Router::get('/pedidos/create', 'pedidos::create', [
     'as' => 'pedidos.create'
 ]);
 
-Router::post('/pedidos/store', 'pedidos::store', [
+Router::post('/pedidos/store', 'pedidos::show', [
     'as' => 'pedidos.store'
 ]);
 
-Router::get('/empresas/pedidos', 'pedidos::porEmpresa', [
-    'as' => 'empresas.pedidos'
-]);
+Router::get(
+    '/departamentos/por-dependencia',
+    'departamentos::por_dependencia',
+    [
+        'as' => 'departamentos.por_dependencia'
+    ]
+);
 
 // =======================
 // COMPRAS
