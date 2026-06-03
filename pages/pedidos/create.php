@@ -338,10 +338,20 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <input type="text" id="nuevo_departamento" class="form-control" placeholder="Departamento">
+                        
+                        <input
+                            type="hidden"
+                            id="modalDependenciaId"
+                        >
+                        <input
+                            type="text"
+                            id="modalDependenciaNombre"
+                            class="form-control"
+                            readonly
+                        >
                     </div>
                     <div class="col-md-6 mb-3">
-                        <input type="text" id="nuevo_contacto" class="form-control" placeholder="Contacto">
+                        <input type="text" id="nuevo_departamento" class="form-control" placeholder="Nombre del departamento">
                     </div>
                     <div class="col-md-6 mb-3">
                         <input type="text" id="nuevo_telefono" class="form-control" placeholder="Teléfono">
@@ -350,7 +360,10 @@
                         <input type="email" id="nuevo_email" class="form-control" placeholder="Email">
                     </div>
                     <div class="col-12 mb-3">
-                        <input type="text" id="nuevo_direccion" class="form-control" placeholder="Dirección">
+                        <input type="text" id="nuevo_responsable" class="form-control" placeholder="Responsable">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <input type="text" id="nueva_direccion" class="form-control" placeholder="Dirección">
                     </div>
                 </div>
                 <div id="departamento-existente" class="alert alert-warning d-none">
@@ -378,8 +391,19 @@
 
 window.routes = {
     departamentosPorDependencia:
-        "<?= route('departamentos.por_dependencia') ?>"
+        "<?= route('departamentos.por_dependencia') ?>",
+
+    departamentosBuscar:
+        "<?= route('departamentos.buscar') ?>",
+
+    departamentosStore:
+        "<?= route('departamentos.store') ?>",
+
+    analistasStore:
+        "<?= route('analistas.store') ?>"
 };
+
+
 
 </script>
 
