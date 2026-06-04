@@ -135,7 +135,7 @@ Router::get('/empresas', 'empresas::index', [
 // =======================
 // ANALISTAS
 // =======================
-Router::post('/analistas', 'analistas::store', [
+Router::post('/analistas/store', 'analistas::store', [
     'as' => 'analistas.store'
 ]);
 
@@ -146,6 +146,6 @@ Router::get('/departamentos/buscar', 'departamentos::buscar', [
     'as' => 'departamentos.buscar'
 ]);
 
-Router::post('/departamentos', 'departamentos::store', [
+Router::post('/departamentos/store', 'departamentos::store', [
     'as' => 'departamentos.store'
 ]);
