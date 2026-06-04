@@ -46,7 +46,7 @@ function guardarAnalista() {
         return;
     }
 
-    fetch(window.appData.routes.analistasStore, {
+    fetch(window.routes.analistasStore, {
 
         method: 'POST',
 
@@ -55,8 +55,6 @@ function guardarAnalista() {
             'Content-Type': 'application/json',
 
             'Accept': 'application/json',
-
-            'X-CSRF-TOKEN': window.appData.csrfToken,
 
         },
 
@@ -115,15 +113,17 @@ function guardarDepartamento() {
 
     const payload = {
 
+        dependencia_id: document.getElementById('modalDependenciaId').value,
+
         nombre_departamento: document.getElementById('nuevo_departamento').value.trim(),
 
-        responsable: document.getElementById('nuevo_contacto').value.trim(),
+        responsable: document.getElementById('nuevo_responsable').value.trim(),
 
         telefono: (document.getElementById('nuevo_telefono').value || '').replace(/\D/g, ''),
 
         email: (document.getElementById('nuevo_email').value || '').trim().toLowerCase(),
 
-        direccion: document.getElementById('nuevo_direccion').value.trim(),
+        direccion: document.getElementById('nueva_direccion').value.trim(),
 
     };
 
@@ -134,7 +134,7 @@ function guardarDepartamento() {
         return;
     }
 
-    fetch(window.appData.routes.departamentosStore, {
+    fetch(window.routes.departamentosStore, {
 
         method: 'POST',
 
@@ -143,8 +143,6 @@ function guardarDepartamento() {
             'Content-Type': 'application/json',
 
             'Accept': 'application/json',
-
-            'X-CSRF-TOKEN': window.appData.csrfToken,
 
         },
 
@@ -164,6 +162,8 @@ function guardarDepartamento() {
 
     .then(departamento => {
 
+        console.log(departamento);
+
         const select = document.getElementById('departamentoSelect');
 
         let option = document.createElement('option');
@@ -175,8 +175,17 @@ function guardarDepartamento() {
         select.appendChild(option);
 
         select.value = departamento.id;
+        
 
         departamentoDetectado = null;
+
+        document.getElementById(
+            'departamento-existente'
+        ).classList.add('d-none');
+
+        document.getElementById(
+            'departamento-info'
+        ).innerText = '';
 
         document.getElementById('departamento-existente').classList.add('d-none');
 
@@ -207,7 +216,7 @@ function buscarDepartamentoExistente() {
     if (!email && !telefono) return;
 
     fetch(
-        `${window.appData.routes.departamentosBuscar}?email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}`
+        `${window.routes.departamentosBuscar}?email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}`
     )
 
     .then(res => res.json())
@@ -260,6 +269,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const departamentoSelect =
         document.getElementById('departamentoSelect');
 
+    const modalDepartamento =
+        document.getElementById('modalDepartamento');
+
+    if (modalDepartamento) {
+
+        modalDepartamento.addEventListener(
+            'show.bs.modal',
+            (event) => {
+
+                const dependenciaId =
+                    dependenciaSelect.value;
+
+                if (!dependenciaId) {
+
+                    event.preventDefault();
+
+                    alert(
+                        'Primero selecciona una dependencia'
+                    );
+
+                    return;
+                }
+
+                const dependenciaNombre =
+                    dependenciaSelect.options[
+                        dependenciaSelect.selectedIndex
+                    ].text;
+
+                document.getElementById(
+                    'modalDependenciaId'
+                ).value = dependenciaId;
+                
+                document.getElementById(
+                    'modalDependenciaNombre'
+                ).value = dependenciaNombre;
+
+                document.getElementById(
+                    'nuevo_departamento'
+                ).value = '';
+
+                document.getElementById(
+                    'nuevo_telefono'
+                ).value = '';
+
+                document.getElementById(
+                    'nuevo_email'
+                ).value = '';
+
+                document.getElementById(
+                    'nuevo_responsable'
+                ).value = '';
+
+                document.getElementById(
+                    'nueva_direccion'
+                ).value = '';
+            }
+        );
+
+    }
     const tipoSelect = document.querySelector('select[name="tipo"]');
 
     const bloqueServicio = document.getElementById('servicioSection');
