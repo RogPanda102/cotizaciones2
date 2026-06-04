@@ -109,6 +109,6 @@
 
 </table>
 
-<script src="<?= asset(config('rutas.js_especificos') . 'pedidos/pedidos_index.js') ?>"></script>
+<script src="<?= asset('public/js/especificos/pedidos/pedidos_index.js') ?>"></script>
 
 <?php include __DIR__ . '/../../includes/layout_end.php'; ?>
