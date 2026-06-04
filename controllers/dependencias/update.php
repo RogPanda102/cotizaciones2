@@ -1,64 +1,46 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../models/DependenciaModel.php';
 require_once __DIR__ . '/../../app/Enums/TipoAlerta.php';
+
 use App\Enums\TipoAlerta;
+
+$model = new DependenciaModel($pdo);
 
 $id = $_POST['id'] ?? null;
 
 $nombre_oficial = trim($_POST['nombre_oficial'] ?? '');
+$nombre_corto   = trim($_POST['nombre_corto'] ?? '');
 
-$nombre_corto = trim($_POST['nombre_corto'] ?? '');
-
-if(!$id) {
-
+if (!$id) {
     die('ID inválido');
-
 }
 
 $errores = [];
 
-if(empty($nombre_oficial)) {
-
+if (empty($nombre_oficial)) {
     $errores[] = 'El nombre oficial es obligatorio';
-
 }
 
-if(strlen($nombre_oficial) > 255) {
-
+if (strlen($nombre_oficial) > 255) {
     $errores[] = 'El nombre oficial es demasiado largo';
-
 }
 
-if(strlen($nombre_corto) > 255) {
-
+if (strlen($nombre_corto) > 255) {
     $errores[] = 'El nombre corto es demasiado largo';
-
 }
 
-if(!empty($errores)) {
-
+if (!empty($errores)) {
     echo '<pre>';
     print_r($errores);
     echo '</pre>';
-
     exit;
 }
 
-$sql = "
-    UPDATE dependencias
-    SET
-        nombre_oficial = :nombre_oficial,
-        nombre_corto = :nombre_corto
-    WHERE id = :id
-";
-
-$stmt = $pdo->prepare($sql);
-
-$stmt->execute([
-    ':nombre_oficial' => $nombre_oficial,
-    ':nombre_corto' => $nombre_corto,
-    ':id' => $id
+$model->update($id, [
+    'nombre_oficial' => $nombre_oficial,
+    'nombre_corto'   => $nombre_corto
 ]);
 
 mensaje(
@@ -67,5 +49,4 @@ mensaje(
 );
 
 header('Location: ' . route('dependencias.index'));
-
 exit;
