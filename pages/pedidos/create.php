@@ -3,7 +3,7 @@
 <?php /** @var array $dependencias */ ?>   
 <?php /** @var array $proveedores */ ?>
 <?php /** @var array $analistas */ ?>
-<?php /** @var array $empresa */ ?>
+<?php /** @var object $empresa */ ?>
 
 
 
@@ -386,7 +386,7 @@
 
 
 
-<script src="<?= asset('assets/js/especificos/pedidos/pedidos_create.js') ?>?v=<?= time() ?>"></script>
+<script src="<?= asset('public/js/especificos/pedidos/pedidos_create.js') ?>?v=<?= time() ?>"></script>
 <script>
 
 window.routes = {

@@ -9,8 +9,8 @@
     <title>Sistema de Gestión</title>
 
     <!-- PAPER DASHBOARD -->
-    <link href="<?= asset('assets/css/bootstrap.min.css') ?>" rel="stylesheet" />
-    <link href="<?= asset('assets/css/paper-dashboard.css?v=2.0.0') ?>" rel="stylesheet" />
+    <link href="<?= asset('public/css/bootstrap.min.css') ?>" rel="stylesheet" />
+    <link href="<?= asset('public/css/paper-dashboard.css?v=2.0.0') ?>" rel="stylesheet" />
     <!-- ICONOS -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
         rel="stylesheet">

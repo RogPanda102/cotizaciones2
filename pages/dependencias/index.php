@@ -89,5 +89,5 @@
     </tbody>
 
 </table>
-<script src="<?= asset('assets/js/especificos/dependencias/dependencias_index.js') ?>"></script>
+<script src="<?= asset('public/js/especificos/dependencias/dependencias_index.js') ?>"></script>
 <?php include __DIR__ . '/../../includes/layout_end.php'; ?>

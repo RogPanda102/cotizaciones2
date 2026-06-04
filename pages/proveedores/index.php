@@ -94,5 +94,5 @@
     </tbody>
 
 </table>
-<script src="<?= asset('assets/js/especificos/proveedores/proveedores_index.js') ?>"></script>
+<script src="<?= asset('public/js/especificos/proveedores/proveedores_index.js') ?>"></script>
 <?php include __DIR__ . '/../../includes/layout_end.php'; ?>
