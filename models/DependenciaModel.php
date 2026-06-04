@@ -11,25 +11,22 @@ class DependenciaModel
 
     public function getAll()
     {
-        $sql = "
-            SELECT *
-            FROM dependencias
-            ORDER BY nombre_oficial ASC
-        ";
-
-        $stmt = $this->pdo->query($sql);
-
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $this->pdo
+            ->query("
+                SELECT *
+                FROM dependencias
+                ORDER BY nombre_oficial ASC
+            ")
+            ->fetchAll(PDO::FETCH_OBJ);
     }
-    public function getById($id)
+
+    public function getById(int $id)
     {
-        $sql = "
+        $stmt = $this->pdo->prepare("
             SELECT *
             FROM dependencias
             WHERE id = :id
-        ";
-
-        $stmt = $this->pdo->prepare($sql);
+        ");
 
         $stmt->execute([
             ':id' => $id
@@ -38,28 +35,9 @@ class DependenciaModel
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function update($id, array $data)
+    public function create(array $data): bool
     {
-        $sql = "
-            UPDATE dependencias
-            SET
-                nombre_oficial = :nombre_oficial,
-                nombre_corto = :nombre_corto
-            WHERE id = :id
-        ";
-
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            ':nombre_oficial' => $data['nombre_oficial'],
-            ':nombre_corto'   => $data['nombre_corto'],
-            ':id'             => $id
-        ]);
-    }
-
-    public function create(array $data)
-    {
-        $sql = "
+        $stmt = $this->pdo->prepare("
             INSERT INTO dependencias
             (
                 nombre_oficial,
@@ -70,9 +48,7 @@ class DependenciaModel
                 :nombre_oficial,
                 :nombre_corto
             )
-        ";
-
-        $stmt = $this->pdo->prepare($sql);
+        ");
 
         return $stmt->execute([
             ':nombre_oficial' => $data['nombre_oficial'],
@@ -80,35 +56,47 @@ class DependenciaModel
         ]);
     }
 
-    public function tienePedidosRelacionados($id)
+    public function update(int $id, array $data): bool
     {
-        $sql = "
-            SELECT COUNT(*) as total
+        $stmt = $this->pdo->prepare("
+            UPDATE dependencias
+            SET
+                nombre_oficial = :nombre_oficial,
+                nombre_corto   = :nombre_corto
+            WHERE id = :id
+        ");
+
+        return $stmt->execute([
+            ':nombre_oficial' => $data['nombre_oficial'],
+            ':nombre_corto'   => $data['nombre_corto'],
+            ':id'             => $id
+        ]);
+    }
+
+    public function tienePedidosRelacionados(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT COUNT(*)
             FROM pedidos
             WHERE dependencia_id = :id
-        ";
-
-        $stmt = $this->pdo->prepare($sql);
+        ");
 
         $stmt->execute([
             ':id' => $id
         ]);
 
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        return (int) $stmt->fetchColumn() > 0;
     }
 
-    public function delete($id)
+    public function delete(int $id): bool
     {
-        $sql = "
+        $stmt = $this->pdo->prepare("
             DELETE FROM dependencias
             WHERE id = :id
-        ";
-
-        $stmt = $this->pdo->prepare($sql);
+        ");
 
         return $stmt->execute([
             ':id' => $id
         ]);
     }
-
 }

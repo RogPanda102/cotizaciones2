@@ -16,12 +16,13 @@ if (!$id) {
 | VALIDAR PEDIDOS RELACIONADOS
 |--------------------------------------------------------------------------
 */
-$resultado = $model->tienePedidosRelacionados($id);
-if ($resultado->total > 0) {
+if($model->tienePedidosRelacionados($id))
+{
     mensaje(
         'No puedes eliminar esta dependencia porque tiene pedidos relacionados',
         TipoAlerta::WARNING
     );
+
     header('Location: ' . route('dependencias.index'));
     exit;
 }
