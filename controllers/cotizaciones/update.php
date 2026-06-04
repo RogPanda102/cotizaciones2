@@ -2,8 +2,11 @@
 
 require_once __DIR__ . '/../../config/app.php';
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../models/CotizacionModel.php';
 
 use App\Enums\TipoAlerta;
+
+$model = new CotizacionModel($pdo);
 
 /*
 |---------------------------------------------------------
@@ -23,6 +26,7 @@ if (!$id) {
 |---------------------------------------------------------
 */
 $data = [
+
     'empresa_id' => $_POST['empresa_id'] ?? null,
     'tipo_cotizacion' => $_POST['tipo_cotizacion'] ?? null,
     'estado' => $_POST['estado'] ?? null,
@@ -37,45 +41,25 @@ $data = [
     'lugar_de_entrega' => $_POST['lugar_de_entrega'] ?? null,
     'monto_total' => $_POST['monto_total'] ?? null,
     'dias_credito' => $_POST['dias_credito'] ?? null,
+
 ];
 
 /*
 |---------------------------------------------------------
-| UPDATE SQL
+| ACTUALIZAR
 |---------------------------------------------------------
 */
-$sql = "
-    UPDATE cotizaciones
-    SET
-        empresa_id = :empresa_id,
-        tipo_cotizacion = :tipo_cotizacion,
-        estado = :estado,
-        numero_cotizacion = :numero_cotizacion,
-        folio_externo = :folio_externo,
-        dependencia_id = :dependencia_id,
-        departamento_id = :departamento_id,
-        analista_id = :analista_id,
-        fecha_envio = :fecha_envio,
-        fecha_recepcion = :fecha_recepcion,
-        horario_de_entrega = :horario_de_entrega,
-        lugar_de_entrega = :lugar_de_entrega,
-        monto_total = :monto_total,
-        dias_credito = :dias_credito
-    WHERE id = :id
-";
-
-$stmt = $pdo->prepare($sql);
-
-$data['id'] = $id;
-
-$stmt->execute($data);
+$model->update($id, $data);
 
 /*
 |---------------------------------------------------------
 | MENSAJE + REDIRECT
 |---------------------------------------------------------
 */
-mensaje('Cotización actualizada correctamente', TipoAlerta::SUCCESS);
+mensaje(
+    'Cotización actualizada correctamente',
+    TipoAlerta::SUCCESS
+);
 
 header("Location: /cotizaciones2/cotizaciones");
 exit;

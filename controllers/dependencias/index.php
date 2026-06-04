@@ -1,30 +1,27 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../models/DependenciaModel.php';
 
-$query = $pdo->query("
-    SELECT * FROM dependencias
-");
-
-$dependencias = $query->fetchAll(PDO::FETCH_OBJ);
-
+$model = new DependenciaModel($pdo);
+$dependencias = $model->getAll();
 /*
 |--------------------------------------------------------------------------
 | DATOS GENERALES
 |--------------------------------------------------------------------------
 */
-
 $nombre_pagina = '';
-
 $tarea = 'Dependencias';
-
 $breadcrumb_array = [
     [
         'tarea' => 'Dependencias',
         'href' => '#'
     ]
 ];
-
 $breadcrumb = breadcrumb($tarea, $breadcrumb_array);
-
-include  __DIR__ . '/../../pages/dependencias/index.php';
+/*
+|--------------------------------------------------------------------------
+| VISTA
+|--------------------------------------------------------------------------
+*/
+include __DIR__ . '/../../pages/dependencias/index.php';

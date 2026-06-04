@@ -1,34 +1,24 @@
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../models/DependenciaModel.php';
+
+$model = new DependenciaModel($pdo);
 
 $id = $_GET['id'] ?? null;
 
-if(!$id) {
-
+if (!$id)
+{
     die('ID no recibido');
-
 }
 
-$sql = "
-    SELECT *
-    FROM dependencias
-    WHERE id = :id
-";
+$dependencia = $model->getById($id);
 
-$stmt = $pdo->prepare($sql);
-
-$stmt->execute([
-    ':id' => $id
-]);
-
-$dependencia = $stmt->fetch(PDO::FETCH_OBJ);
-
-if(!$dependencia) {
-
+if (!$dependencia)
+{
     die('Dependencia no encontrada');
-
 }
+
 /*
 |--------------------------------------------------------------------------
 | DATOS GENERALES
@@ -52,5 +42,10 @@ $breadcrumb_array = [
 
 $breadcrumb = breadcrumb($tarea, $breadcrumb_array);
 
+/*
+|--------------------------------------------------------------------------
+| VISTA
+|--------------------------------------------------------------------------
+*/
 
 include __DIR__ . '/../../pages/dependencias/edit.php';
